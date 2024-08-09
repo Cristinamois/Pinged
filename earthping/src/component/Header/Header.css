@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #405D72;
+}
+
+header {
+    padding: 1.5%;
+    background-color: #405D72;;
+    border-bottom: 0.5px solid grey;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    text-decoration: none;
+    color: white;
+    margin: 0;
+    font-family: 'RBold', 'Times New Roman', Times, serif;
+    font-size: 250%;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 0.7em;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-family: 'RLight', 'Times New Roman', Times, serif;
+    font-size: 120%;
+    transition: .5s;
+}
