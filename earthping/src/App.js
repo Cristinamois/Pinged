@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
+import 'leaflet/dist/leaflet.css';
 import Header from './component/Header/Header';
 import Body from './component/Body/Body';
 
