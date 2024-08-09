@@ -1,3 +1,64 @@
+@font-face {
+  font-family: 'RBlack';
+  src: url('./font/Roboto/Roboto-Black.ttf') format(truetype);
+}
+
+
+@font-face {
+  font-family: 'Rblacktalic';
+  src: url('./font/Roboto/Roboto-BlackItalic.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'RBold';
+  src: url('./font/Roboto/Roboto-Bold.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'RboldItalic';
+  src: url('./font/Roboto/Roboto-BoldItalic.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'Ritalic';
+  src: url('./font/Roboto/Roboto-Italic.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'Rlight';
+  src: url('./font/Roboto/Roboto-Light.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'RlightItalic';
+  src: url('./font/Roboto/Roboto-LightItalic.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'Rmedium';
+  src: url('./font/Roboto/Roboto-Medium.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'RmediumItalic';
+  src: url('./font/Roboto/Roboto-MediumItalic.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'Rregular';
+  src: url('./font/Roboto/Roboto-Regular.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'Rthin';
+  src: url('./font/Roboto/Roboto-Thin.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'RthinItalic';
+  src: url('./font/Roboto/Roboto-ThinItalic.ttf') format(truetype);
+}
+
 .App {
   text-align: center;
 }
