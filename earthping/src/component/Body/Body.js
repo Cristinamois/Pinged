@@ -5,13 +5,13 @@ import MapComponent from '../Map/Map';
 function Body() {
   return (
     <div className='grid-container'>
-
-        <div id="left-column">
+        <div className="left-column">
             <MapComponent />
         </div>
-        <div class="separator"></div>
-        <div class="right-column">
+        <div className="separator"></div>
+        <div className="right-column">
             <p>Colonne droite</p>
+            <p>test 2</p>
         </div>
     </div>
   );
