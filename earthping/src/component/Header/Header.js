@@ -6,11 +6,11 @@ function Header() {
     <header className='header'>
       <h1>Earth.Pinged</h1>
       <nav className='navigation'>
-        <ul>
+        <ul className="headList">
           <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/connnection">Connection</a></li>
+          {/* <li><a href="/about">About</a></li> */}
+          {/* <li><a href="/contact">Contact</a></li> */}
+          <li><a id='login' href="/connnection">Login</a></li>
         </ul>
       </nav>
     </header>
