@@ -4,9 +4,15 @@ body {
     background-color: #405D72;
 }
 
-#login {
+.login {
     /* left: 50%; */
     padding-left: 1em;
+}
+
+
+a:hover {
+    font-size: 21px; /* Augmente la taille de police au survol */
+    font-family: 'RBold', sans-serif;
 }
 
 header {
@@ -44,5 +50,6 @@ nav ul li a {
     color: #ffffff;
     font-family: 'RLight', 'Times New Roman', Times, serif;
     font-size: 120%;
-    transition: .5s;
+    transition: font-family 0.5s ease, font-size 0.5s ease;
+    /* transition: .5s; */
 }
