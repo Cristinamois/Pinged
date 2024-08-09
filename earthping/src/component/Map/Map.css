@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .map-container {
+    flex: 1;
+    max-width: calc(100% - 300px); /* Par exemple, laisse un espace de 300px sur la droite */
+    height: 100%;
+    position: relative; /* Pour que la largeur de 100% prenne effet */
+  }

@@ -1,3 +1,27 @@
 body {
     background-color: #F7E7DC;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Deux colonnes de largeur égale */
+    height: 100vh; /* Hauteur de la fenêtre */
+}
+
+.left-column {
+    /* max-width: calc(100% - 30%); */
+    padding: 0;
+}
+
+.separator {
+    background-color: #405D72; /* Couleur de la ligne séparatrice */
+    height: 100%; /* Hauteur de la fenêtre */
+    width: 0.3em;
+}
+
+.right-column {
+    background-color: #F7E7DC; /* Couleur de fond pour la colonne droite */
+    padding: 20px;
 }

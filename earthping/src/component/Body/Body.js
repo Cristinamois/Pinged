@@ -4,8 +4,15 @@ import MapComponent from '../Map/Map';
 
 function Body() {
   return (
-    <div>
-        <MapComponent />
+    <div className='grid-container'>
+
+        <div id="left-column">
+            <MapComponent />
+        </div>
+        <div class="separator"></div>
+        <div class="right-column">
+            <p>Colonne droite</p>
+        </div>
     </div>
   );
 }
