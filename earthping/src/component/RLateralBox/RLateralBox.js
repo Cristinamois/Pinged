@@ -5,10 +5,19 @@ import './RLateralBox.css';
 
 function RLateralBox() {
   return (
+    <div>
+
     <div className='profil'>
-        <h2>[you] Anon</h2>
+        <h3>[you] Anon</h3>
         <p><br/><br/><br/>It seems like you're not connected yet...<br/></p>
         <button>I don't care</button>
+    </div>
+
+    <div className='all'>
+      
+      
+    </div>
+
     </div>
   );
 }
