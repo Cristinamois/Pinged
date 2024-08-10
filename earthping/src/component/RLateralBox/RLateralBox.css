@@ -13,18 +13,24 @@ body {
     height: 30%;
     background-color: #c7b5a9;
     box-sizing: border-box;
-    border: 2px solid black;
+    border: 2px solid #405D72;
     border-style: solid;
     border-radius: 10px;
     padding: 20px 10px;
+    background: linear-gradient(to bottom, #405D72 25%, transparent 20%);
     /* overflow: hidden; */
     /* margin-top: -50px; */
+    transition: transform 0.2s ease-in-out;
+}
+.profil:hover {
+    transform: scale(1.01); /* Agrandit la boîte de 20% au survol */
 }
 
-.profil h2 {
+.profil h3 {
     position: relative;
-    margin-top: 10px;
+    margin-top: 0px;
     font-family: "RBold", Arial;
+    color: whitesmoke;
 }
 
 button {
@@ -56,13 +62,6 @@ button {
 /* p {
     font-style
 } */
-
-
-
-
-
-
-
 
 
 
