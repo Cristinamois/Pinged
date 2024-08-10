@@ -28,8 +28,9 @@ body {
 
 .right-column {
     background-color: #F7E7DC; 
-    padding: 20px;
+    padding: 5px;
     box-sizing: border-box;
+    /* overflow: hidden;  */
 }
 
 .map-container {

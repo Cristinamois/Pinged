@@ -1,6 +1,7 @@
 import React from 'react';
 import './Body.css';
 import MapComponent from '../Map/Map';
+import RLateralBox from '../RLateralBox/RLateralBox';
 
 function Body() {
   return (
@@ -10,8 +11,7 @@ function Body() {
         </div>
         <div className="separator"></div>
         <div className="right-column">
-            <p>Colonne droite</p>
-            <p>test 2</p>
+            <RLateralBox />
         </div>
     </div>
   );
