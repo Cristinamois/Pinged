@@ -21,14 +21,14 @@ body {
 }
 
 .separator {
-    background-color: #405D72;
+    background-color: #244855;
     height: 100%;
     width: 0.3em;
 }
 
 .right-column {
-    background-color: #F7E7DC; 
-    padding: 5px;
+    background-color: #FBE9D0; 
+    padding: 0;
     box-sizing: border-box;
     /* overflow: hidden;  */
 }

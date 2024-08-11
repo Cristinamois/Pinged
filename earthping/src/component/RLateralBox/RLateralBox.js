@@ -9,8 +9,9 @@ function RLateralBox() {
 
     <div className='profil'>
         <h3>[you] Anon</h3>
-        <p><br/><br/><br/>It seems like you're not connected yet...<br/></p>
-        <button>I don't care</button>
+        {/* <p><br/><br/><br/>It seems like you're not connected yet...<br/></p> */}
+        {/* <button>I don't care</button> */}
+        <p>hello</p>
     </div>
 
     <div className='all'>
