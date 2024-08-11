@@ -15,7 +15,7 @@ a:hover {
 }
 
 header {
-    padding: 1.5%;
+    padding: 15px;
     background-color: #244855;
     color: #fff;
     display: flex;
@@ -30,7 +30,7 @@ header h1 {
     color: #FBE9D0;
     margin: 0;
     font-family: 'RBold', 'Times New Roman', Times, serif;
-    font-size: 250%;
+    font-size: 230%;
 }
 
 nav ul {

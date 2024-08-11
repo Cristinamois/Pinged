@@ -10,8 +10,12 @@ function LandingPage() {
     <div className='LandingPage'>
         <LandingHeader />
         <MapComponent />
+        <div class="buttons-container">
+            <button class="button-arounder">About</button>
+        </div>
     </div>
   );
 }
 
 export default LandingPage;
+
