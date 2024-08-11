@@ -37,7 +37,7 @@ body {
     font-size: 1rem;
     background: #244855;
     font-family: 'RLight', sans-serif;
-    color: hsl(190deg, 10%, 95%);
+    color: #FBE9D0;
     
     box-shadow: 0 0px 0px hsla(190deg, 15%, 5%, .2);
     transform: translateY(0);
