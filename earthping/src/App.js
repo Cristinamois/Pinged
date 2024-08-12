@@ -5,12 +5,14 @@ import 'leaflet/dist/leaflet.css';
 // import Body from './component/Body/Body';
 // import MapComponent from './component/Map/Map';
 import LandingPage from './component/Landing/Landing';
-import Login from './component/Login/Login';
+// import Signup from './component/Signup/Signup';
+// import Login from './component/Login/Login';
 
 function App() {
   return (
-    <Login />
-    // <LandingPage />
+    // <Login />
+    // <Signup />
+    <LandingPage />
   );
 }
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import './Login.css';
+import './Signup.css';
 import earthDraw from '../../assets/images/cE.png'
-import LoginForm from '../LoginForm/LoginForm';
+import SignupForm from '../SignupForm/SignupForm';
 
-function Login() {
+function Signup() {
   return (
     <div>
       <div className='lgBox'>
@@ -12,8 +12,8 @@ function Login() {
         {/* <p>Planet earth draw</p> */}
         </div>
         <div className='rightGrid'>
-          <LoginForm />
-          <p className='bottom-text'>Don't have an account? <a href='/signup'>Sign up</a></p>
+          <SignupForm />
+          <p className='bottom-text'>Already have an account? <a href='/login'>Login here</a></p>
 
         </div>
       </div>
@@ -21,4 +21,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;

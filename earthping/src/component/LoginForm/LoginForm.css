@@ -1,56 +1,49 @@
-.signup-form-container {
+/* LoginForm.css */
+
+.login-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'RBold', sans-serif;
   }
   
-  .signup-form {
+  .login-form {
     padding: 20px;
-    flex-direction: colum;
+    display: flex;
+    flex-direction: column; /* Assure que les éléments sont empilés verticalement */
   }
   
-  .signup-form h2 {
+  .login-form h2 {
     margin-bottom: 20px;
     text-align: center;
   }
   
-  .signup-form .name-fields {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    gap: 30px;
-  }
-  
-  .signup-form .form-group {
-    width: 48%;
-  }
-  
-  .signup-form label {
+  .login-form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    margin-left: 20px;
   }
   
-  .signup-form input {
-    width: 83%;
+  .login-form input {
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-left: 20px;
+  }
+
+  .login-form input:focus {
+    outline: none;
+    border: 2px solid #ccc;
   }
   
-  .signup-form .error {
+  .login-form .error {
     margin-bottom: 15px;
     text-align: center;
   }
   
-  
-
-  .signup-form button {
-    width: 90%;
+  .login-form button {
+    width: 100%;
     padding: 17px 30px;
     margin-top: 20px;
     border-radius: 10px;
@@ -64,28 +57,14 @@
     cursor: pointer;
   }
   
-  .signup-form button:hover {
+  .login-form button:hover {
     box-shadow: #61892F 5px 5px 0px 0px;
   }
   
-  .signup-form button:active {
+  .login-form button:active {
     background-color: #61892F;
-    /*50, 168, 80*/
     box-shadow: #86C232 0px 0px 0px 0px;
     transform: translateY(5px);
-    transform: translateX(5px);
     transition: 200ms;
   }
-
-  .signup-form input:focus {
-    outline: none;
-    border: 2px solid #ccc; /* Remplace le rouge par la couleur par défaut */
-  }
   
-  .signup-form input.invalid {
-    border: 1px solid red;
-  }
-  
-  .signup-form input.valid-email {
-    border: 2px solid green;
-  }

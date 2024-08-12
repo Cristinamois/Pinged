@@ -1,6 +1,6 @@
 import React from 'react';
 // import './Header.css';
-import './Landing.js'
+// import './Landing.js'
 import './Landing.css'
 import LandingHeader from '../LandingHeader/LandingHeader.js';
 import MapComponent from '../Map/Map.js';
