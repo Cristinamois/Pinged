@@ -16,16 +16,27 @@ body {
 	grid-template-columns: 1fr 1fr;
 }
 
+
+
 .leftGrid {
     padding: 0;
     box-sizing: border-box;
 	/* background-color: blue; */
     overflow: hidden; 
+	background-image: url('../../assets/images/cE.png');
+	border-radius: 15px 0 0 15px;
+	background-repeat: no-repeat;
 }
+
 
 .rightGrid {
     padding: 0;
     box-sizing: border-box; 
 	/* background-color: red; */
     overflow: hidden; 
+	display: flex;
+	/* align-items: center; */
+	justify-content: center;
+	left: 50%;
 }
+

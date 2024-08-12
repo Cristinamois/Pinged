@@ -1,16 +1,17 @@
 import React from 'react';
 import './Login.css';
-
+import earthDraw from '../../assets/images/cE.png'
 
 function Login() {
   return (
     <div>
       <div className='lgBox'>
         <div className='leftGrid'>
-        <p>Login Box</p>
+          <img src={earthDraw} alt='Drawing of planet earth' />
+        {/* <p>Planet earth draw</p> */}
         </div>
         <div className='rightGrid'>
-          <p>Login Box</p>
+          <h3>Log in</h3>
 
         </div>
       </div>
