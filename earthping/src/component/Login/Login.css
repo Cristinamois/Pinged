@@ -9,7 +9,7 @@ body {
 
 .lgBox {
 	display: grid;
-	width: 80vw;
+	width: 90%;
 	height: 80vh;
 	background-color: beige;
 	border-radius: 15px;
@@ -25,7 +25,7 @@ body {
     overflow: hidden; 
 	background-image: url('../../assets/images/cE.png');
 	border-radius: 15px 0 0 15px;
-	background-repeat: no-repeat;
+	/* background-repeat: no-repeat; */
 }
 
 

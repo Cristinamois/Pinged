@@ -1,6 +1,7 @@
 import React from 'react';
 import './Login.css';
 import earthDraw from '../../assets/images/cE.png'
+import SignupForm from '../SignupForm/SignupForm';
 
 function Login() {
   return (
@@ -11,7 +12,7 @@ function Login() {
         {/* <p>Planet earth draw</p> */}
         </div>
         <div className='rightGrid'>
-          <h3>Log in</h3>
+          <SignupForm />
 
         </div>
       </div>
