@@ -2,10 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'RBold', sans-serif;
   }
   
   .signup-form {
     padding: 20px;
+    flex-direction: colum;
   }
   
   .signup-form h2 {
@@ -73,4 +75,17 @@
     transform: translateY(5px);
     transform: translateX(5px);
     transition: 200ms;
+  }
+
+  .signup-form input:focus {
+    outline: none;
+    border: 2px solid #ccc; /* Remplace le rouge par la couleur par défaut */
+  }
+  
+  .signup-form input.invalid {
+    border: 1px solid red;
+  }
+  
+  .signup-form input.valid-email {
+    border: 2px solid green;
   }
