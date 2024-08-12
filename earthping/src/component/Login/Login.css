@@ -1,0 +1,31 @@
+
+body {
+	margin: 0;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.lgBox {
+	display: grid;
+	width: 80vw;
+	height: 80vh;
+	background-color: beige;
+	border-radius: 15px;
+	grid-template-columns: 1fr 1fr;
+}
+
+.leftGrid {
+    padding: 0;
+    box-sizing: border-box;
+	/* background-color: blue; */
+    overflow: hidden; 
+}
+
+.rightGrid {
+    padding: 0;
+    box-sizing: border-box; 
+	/* background-color: red; */
+    overflow: hidden; 
+}
