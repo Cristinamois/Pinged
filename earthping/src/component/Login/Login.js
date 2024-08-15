@@ -5,7 +5,7 @@ import LoginForm from '../LoginForm/LoginForm';
 
 function Login() {
   return (
-    <div>
+    <div className='signup-container-all'>
       <div className='lgBox'>
         <div className='leftGrid'>
           <img src={earthDraw} alt='Drawing of planet earth' />

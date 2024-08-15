@@ -1,11 +1,11 @@
 import React from 'react';
-import './Signup.css';
+import './Signup.css'
 import earthDraw from '../../assets/images/cE.png'
 import SignupForm from '../SignupForm/SignupForm';
 
 function Signup() {
   return (
-    <div>
+    <div className='signup-container-all'>
       <div className='lgBox'>
         <div className='leftGrid'>
           <img src={earthDraw} alt='Drawing of planet earth' />

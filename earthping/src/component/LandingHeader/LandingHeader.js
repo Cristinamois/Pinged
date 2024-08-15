@@ -1,5 +1,7 @@
 import React from 'react';
+// import Signup from '../Signup/Signup';
 import './LandingHeader.css';
+import { Link } from 'react-router-dom';
 
 function LandingHeader() {
   return (
@@ -7,9 +9,7 @@ function LandingHeader() {
       <h1>Earth.Pinged</h1>
       <nav className='navigation'>
         <ul className="headList">
-          {/* <li><a href="/about">About</a></li> */}
-          {/* <li><a href="/contact">Contact</a></li> */}
-          <li><a className="login" href="/connnection">Login / burger</a></li>
+          <li><Link to="/signup">Sign up here</Link></li> {/* Lien vers la page signup */}
         </ul>
       </nav>
     </header>

@@ -10,8 +10,8 @@ function LandingPage() {
     <div className='LandingPage'>
         <LandingHeader />
         <MapComponent />
-        <div class="buttons-container">
-            <button class="button-arounder">About</button>
+        <div className="buttons-container">
+            <button className="button-arounder">About</button>
         </div>
     </div>
   );
