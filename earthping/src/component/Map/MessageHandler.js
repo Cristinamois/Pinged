@@ -7,7 +7,11 @@ export function displayMessage(map, position, message, duration = 10 * 1000) { /
     </div>
   `;
 
-  const popup = L.popup({ closeOnClick: false, autoClose: false })
+  const popup = L.popup({
+    closeOnClick: false,
+    autoClose: false,
+    className: 'custom-popup' // Ajouter la classe personnalisée ici
+  })
     .setLatLng(position)
     .setContent(popupContent)
     .openOn(map);
