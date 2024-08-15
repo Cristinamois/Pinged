@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
-import './Map.css';
+import './Map.css'; // Importer les styles spécifiques à la carte
+import './MessageHandler.css'; // Importer les styles pour les popups
 import { createPopup } from './MessageHandler';
 
 function MapComponent() {

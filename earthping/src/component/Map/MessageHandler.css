@@ -1,0 +1,54 @@
+/* src/component/Map/MessageHandler.css */
+
+/* Styles pour le contenu du popup */
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: greenyellow; /* Couleur de fond du popup */
+    border-radius: 10px; /* Arrondir les coins du popup */
+    border: 2px solid #4CAF50; /* Bordure verte du popup */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Ombre portée */
+    padding: 10px;
+    max-width: 300px; /* Largeur maximale du popup */
+  }
+  
+  /* Styles pour le texte dans le popup */
+  .custom-popup p {
+    color: #333; /* Couleur du texte */
+    font-family: Arial, sans-serif; /* Police du texte */
+    font-size: 14px; /* Taille de la police */
+    margin: 0;
+    text-align: center; /* Centrer le texte */
+  }
+  
+  /* Styles pour le formulaire dans le popup */
+  .custom-popup form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(56, 56, 56);
+  }
+  
+  /* Styles pour la zone de texte dans le formulaire */
+  .custom-popup textarea {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: rgb(23, 77, 50);
+    resize: none; /* Empêcher le redimensionnement de la zone de texte */
+  }
+  
+  /* Styles pour le bouton de sauvegarde */
+  .custom-popup button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: blue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .custom-popup button:hover {
+    background-color: #45a049;
+  }
+  

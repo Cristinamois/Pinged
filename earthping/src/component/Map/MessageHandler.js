@@ -1,5 +1,7 @@
 import L from 'leaflet';
 
+import './MessageHandler.css'
+
 export function displayMessage(map, position, message, duration = 10 * 1000) { // 10 secondes par défaut
   const popupContent = `
     <div id="popup-content">
