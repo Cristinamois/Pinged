@@ -1,17 +1,16 @@
-// src/components/MapComponent.js
+// src/component/Map/Map.js
 
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import Loading from '../Loading/Loading';
+import './Map.css';
+import { createPopup } from './MessageHandler';
 
 function MapComponent() {
-  const [position, setPosition] = useState(null); // Initialement null
+  const [position, setPosition] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fonction pour obtenir la position actuelle
     const fetchPosition = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -35,24 +34,28 @@ function MapComponent() {
     fetchPosition();
   }, []);
 
-  // Afficher un message d'erreur ou un message de chargement si nécessaire
-  if (loading) return <div><Loading /></div>;
+  useEffect(() => {
+    if (position) {
+      const map = L.map('map').setView(position, 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      const marker = L.marker(position).addTo(map);
+
+      // Initial creation of the popup with the form
+      createPopup(map, position);
+
+      return () => map.remove();
+    }
+  }, [position]);
+
+  if (loading) return <div>Chargement de la carte...</div>;
   if (error) return <div>{error}</div>;
 
   return (
-    <MapContainer center={position} zoom={13} style={{ height: '85vh', width: '100%' }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      {position && (
-        <Marker position={position} icon={L.icon({iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png'})}>
-          <Popup>
-            Vous êtes ici.
-          </Popup>
-        </Marker>
-      )}
-    </MapContainer>
+    <div id="map" style={{ height: '100vh', width: '100%' }}></div>
   );
 }
 
