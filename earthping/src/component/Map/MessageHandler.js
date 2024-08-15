@@ -1,8 +1,5 @@
-// src/component/Map/messageHandler.js
-
 import L from 'leaflet';
 
-// Fonction pour afficher un message pendant une certaine durée
 export function displayMessage(map, position, message, duration = 10 * 1000) { // 10 secondes par défaut
   const popupContent = `
     <div id="popup-content">
@@ -10,19 +7,17 @@ export function displayMessage(map, position, message, duration = 10 * 1000) { /
     </div>
   `;
 
-  const popup = L.popup()
+  const popup = L.popup({ closeOnClick: false, autoClose: false })
     .setLatLng(position)
     .setContent(popupContent)
     .openOn(map);
 
   setTimeout(() => {
     map.removeLayer(popup);
-    // Recréez le popup pour permettre la nouvelle saisie
-    createPopup(map, position);
+    createPopup(map, position); // Réaffiche le formulaire après l'expiration du message
   }, duration);
 }
 
-// Fonction pour créer un popup avec le formulaire de message
 export function createPopup(map, position) {
   const popupContent = `
     <div id="popup-content">
@@ -33,7 +28,7 @@ export function createPopup(map, position) {
     </div>
   `;
 
-  const popup = L.popup()
+  const popup = L.popup({ closeOnClick: false, autoClose: false })
     .setLatLng(position)
     .setContent(popupContent)
     .openOn(map);
@@ -42,6 +37,10 @@ export function createPopup(map, position) {
     e.preventDefault();
     const message = document.getElementById('message-input').value;
     if (message) {
+      // Remplace le contenu du popup avec le message
+      popup.setContent(`<p>${message}</p>`).update();
+
+      // Affiche le message et le cache après 10 secondes
       displayMessage(map, position, message);
     }
   });
