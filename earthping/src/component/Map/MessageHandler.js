@@ -1,6 +1,9 @@
 import L from 'leaflet';
 
-import './MessageHandler.css'
+// import './MessageHandler.css'
+
+import './MessageHandler.css'; // Importer les styles pour les popups
+
 
 export function displayMessage(map, position, message, duration = 10 * 1000) { // 10 secondes par défaut
   const popupContent = `
@@ -12,7 +15,7 @@ export function displayMessage(map, position, message, duration = 10 * 1000) { /
   const popup = L.popup({
     closeOnClick: false,
     autoClose: false,
-    className: 'custom-popup' // Ajouter la classe personnalisée ici
+    closeButton: false
   })
     .setLatLng(position)
     .setContent(popupContent)
@@ -28,8 +31,8 @@ export function createPopup(map, position) {
   const popupContent = `
     <div id="popup-content">
       <form id="message-form">
-        <textarea id="message-input" rows="3" cols="20" placeholder="Enter a message"></textarea>
-        <button type="submit">Save</button>
+        <textarea id="message-input" rows="3" cols="20" placeholder="Enter your message"></textarea>
+        <button type="submit" id="save-button">Save</button>
       </form>
     </div>
   `;
