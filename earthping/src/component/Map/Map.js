@@ -1,4 +1,4 @@
-// src/component/Map/Map.js
+// src/component/Map/MapComponent.js
 
 import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
