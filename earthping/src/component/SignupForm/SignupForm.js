@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Importer axios
+import { useNavigate } from 'react-router-dom'; // Importer useNavigate
 import './SignupForm.css'; // Importer le fichier CSS pour le style du formulaire
 
 function SignupForm() {
@@ -19,6 +20,8 @@ function SignupForm() {
     password: false,
     confirmPassword: false
   });
+
+  const navigate = useNavigate(); // Initialiser le hook useNavigate
 
   useEffect(() => {
     // Vérification instantanée des emails
@@ -78,8 +81,15 @@ function SignupForm() {
 
       if (response.status === 201) {
         console.log('User created successfully');
-        // Rediriger l'utilisateur ou afficher un message de succès
-        alert('User created successfully!');
+        // Réinitialiser les erreurs
+        setErrors({
+          email: false,
+          confirmEmail: false,
+          password: false,
+          confirmPassword: false
+        });
+        // Rediriger vers la page d'accueil après une inscription réussie
+        navigate('/');
       } else {
         console.log('Signup failed');
         alert('Signup failed. Please try again.');
