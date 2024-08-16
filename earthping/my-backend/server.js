@@ -1,32 +1,77 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const pool = require('./db'); // Importez la configuration de la base de données
+
+const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(express.json()); // Pour analyser le corps JSON des requêtes
-app.use(cors()); // Pour permettre les requêtes CORS si nécessaire
+app.use(cors());
+app.use(bodyParser.json());
 
-// Simuler un stockage en mémoire
-let messages = [];
+// Route to handle signup
+app.post('/signup', async (req, res) => {
+  const { firstName, lastName, username, email, password } = req.body;
 
-// Route POST pour recevoir des messages
-app.post('/messages', (req, res) => {
-  const { message } = req.body;
-  console.log('Message Recu: ', message);
-  if (message) {
-    messages.push(message);
-    res.json({ success: true, message: 'Message reçu' });
-  } else {
-    res.status(400).json({ success: false, message: 'Message manquant' });
+  try {
+    // Check if email already exists
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (result.rows.length > 0) {
+      return res.status(400).json({ message: 'Email already exists' });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Save user
+    await pool.query(
+      'INSERT INTO users (first_name, last_name, username, email, password) VALUES ($1, $2, $3, $4, $5)',
+      [firstName, lastName, username, email, hashedPassword]
+    );
+
+    res.status(201).json({ message: 'User created' });
+  } catch (error) {
+    console.error('Error during signup:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-// Route GET pour récupérer les messages
-app.get('/messages', (req, res) => {
-  res.json(messages);
+// Route to handle login
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Find user
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const user = result.rows[0];
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    // Check password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    // Generate token
+    const token = jwt.sign({ email: user.email }, 'your_jwt_secret', { expiresIn: '1h' });
+
+    res.json({ token });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
-// Démarrer le serveur
-app.listen(3001, () => {
-  console.log('Serveur en cours d\'exécution sur http://localhost:3001');
+// Route to test if server is running
+app.get('/ping', (req, res) => {
+  res.json({ message: 'Pong' });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

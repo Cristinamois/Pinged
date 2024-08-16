@@ -1,6 +1,6 @@
-// src/components/LoginForm/LoginForm.js
 import React, { useState } from 'react';
-import './LoginForm.css'; // Assurez-vous que ce fichier CSS existe
+import axios from 'axios';
+import './LoginForm.css';
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -19,14 +19,16 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validation simple ou soumission du formulaire
-    if (!formData.email || !formData.password) {
-      setError('Please fill in all fields.');
-      return;
-    }
-    // Soumettre le formulaire si tout est correct
-    console.log('Login submitted:', formData);
-    setError('');
+
+    axios.post('http://localhost:3001/login', formData)
+      .then(response => {
+        console.log('Login successful:', response.data);
+        // Handle login success (e.g., store token, redirect, etc.)
+      })
+      .catch(error => {
+        console.error('Error logging in:', error.response?.data || error.message);
+        setError('Invalid email or password');
+      });
   };
 
   return (
