@@ -89,7 +89,7 @@ function SignupForm() {
           confirmPassword: false
         });
         // Rediriger vers la page d'accueil après une inscription réussie
-        navigate('/');
+        navigate('/Dashboard');
       } else {
         console.log('Signup failed');
         alert('Signup failed. Please try again.');

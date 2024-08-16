@@ -8,6 +8,7 @@ import 'leaflet/dist/leaflet.css';
 import Signup from './component/Signup/Signup';
 import Login from './component/Login/Login';
 import LandingPage from './component/Landing/Landing';
+import Dashboard from './component/DashBoard/Dashboard';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
+      <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </Router>
   );
