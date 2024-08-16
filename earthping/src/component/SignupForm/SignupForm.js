@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './SignupForm.css'; // Importez un fichier CSS pour le style du formulaire
+import axios from 'axios'; // Importer axios
+import './SignupForm.css'; // Importer le fichier CSS pour le style du formulaire
 
 function SignupForm() {
   const [formData, setFormData] = useState({
@@ -50,7 +51,7 @@ function SignupForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation des emails
@@ -65,14 +66,32 @@ function SignupForm() {
       return;
     }
 
-    // Soumettre le formulaire si tout est correct
-    console.log('Formulaire soumis avec succès');
-    setErrors({
-      email: false,
-      confirmEmail: false,
-      password: false,
-      confirmPassword: false
-    });
+    try {
+      // Envoyer les données au backend
+      const response = await axios.post('http://localhost:3001/signup', {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        username: formData.username,
+        email: formData.email,
+        password: formData.password
+      });
+
+      if (response.status === 201) {
+        console.log('User created successfully');
+        // Rediriger l'utilisateur ou afficher un message de succès
+        alert('User created successfully!');
+      } else {
+        console.log('Signup failed');
+        alert('Signup failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      if (error.response && error.response.status === 400) {
+        alert(error.response.data.message);
+      } else {
+        alert('An error occurred. Please try again later.');
+      }
+    }
   };
 
   return (
@@ -161,16 +180,16 @@ function SignupForm() {
         />
 
         <div className="error" style={{ color: 'red' }}>
-        {errors.email && (
+          {errors.email && (
             <>
-            Emails do not match.<br />
+              Emails do not match.<br />
             </>
-        )}
+          )}
           {errors.password && (
             <>
-            Passwords do not match.<br />
+              Passwords do not match.<br />
             </>
-            )}
+          )}
         </div>
 
         <button type='submit'>Sign up</button>
