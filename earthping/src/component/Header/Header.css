@@ -4,9 +4,39 @@ body {
     background-color: #405D72;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between; /* Aligner les éléments aux extrémités du conteneur */
+    align-items: center; 
+}
+
 .login {
     /* left: 50%; */
-    padding-left: 1em;
+    /* padding-left: 1em; */
+    background-color: transparent;
+    font-size: 120%;
+    color: beige;
+    border-color: #244855;
+    font-family: 'RBold', sans-serif;
+}
+
+.login:hover {
+    font-size: 21px;
+    transition: .5s;
+}
+
+.profileimage {
+    border-radius: 50px; /* Arrondir l'image */
+    width: 40px; /* Taille fixe pour l'image */
+    height: 40px; /* Taille fixe pour l'image */
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.profileimage:hover {
+    width: 45px;
+    height: 45px;
+    transition: .5s;
 }
 
 a:hover {

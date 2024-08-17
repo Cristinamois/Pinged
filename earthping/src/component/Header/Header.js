@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Pour la redirection
 import axios from 'axios';
 import './Header.css';
+import profilepicture from '../../assets/images/pp.jpg'
 
 function Header() {
   const navigate = useNavigate(); // Initialiser useNavigate
@@ -28,7 +29,10 @@ function Header() {
       <h1>Earth.Pinged</h1>
       <nav className='navigation'>
         <ul className="headList">
-          <li><a href="/">Home</a></li>
+          {/* <li><a href="/">Home</a></li> */}
+          <li>
+            <img src={profilepicture} alt='profile' className='profileimage'/>
+          </li>
           <li>
             <button className="login" onClick={handleLogout}>Log out</button>
           </li>

@@ -1,7 +1,5 @@
-// routes/auth.js
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const pool = require('../db');
@@ -37,11 +35,11 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-
+// Endpoint pour se déconnecter
 router.post('/logout', (req, res) => {
   try {
     // Effacer le cookie d'authentification s'il y en a un
-    res.clearCookie('authToken'); // Assurez-vous que le nom correspond au cookie que vous utilisez pour la session
+    res.clearCookie('authToken');
 
     // Répondre avec succès
     res.status(200).json({ message: 'Logged out successfully' });
@@ -51,6 +49,7 @@ router.post('/logout', (req, res) => {
   }
 });
 
+// Endpoint pour se connecter
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -64,7 +63,7 @@ router.post('/login', async (req, res) => {
     const user = result.rows[0];
 
     if (!user) {
-      return res.status(400).json({ message: 'Invalid email or password' });
+      return res.status(400).json({ message: 'This user does not exist.' });
     }
 
     // Vérifier le mot de passe
@@ -83,6 +82,32 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Endpoint pour obtenir les informations de l'utilisateur
+router.get('/user', async (req, res) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Extraire le token de l'en-tête
 
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, 'your_jwt_secret');
+    const email = decoded.email;
+
+    // Obtenez les informations de l'utilisateur
+    const result = await pool.query('SELECT username FROM users WHERE email = $1', [email]);
+    const user = result.rows[0];
+
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error retrieving user information:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 module.exports = router;

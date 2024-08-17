@@ -1,5 +1,3 @@
-// src/component/Map/MapComponent.js
-
 import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
 import './Map.css'; // Importer les styles spécifiques à la carte
@@ -9,6 +7,7 @@ function MapComponent() {
   const [position, setPosition] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentUsername, setCurrentUsername] = useState('Anon'); // État pour stocker le nom d'utilisateur
 
   useEffect(() => {
     const fetchPosition = () => {
@@ -35,6 +34,34 @@ function MapComponent() {
   }, []);
 
   useEffect(() => {
+    // Fonction pour récupérer le nom d'utilisateur
+    const fetchUsername = async () => {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        try {
+          const response = await fetch('http://localhost:3001/api/user', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          const user = await response.json();
+          if (user.username) {
+            setCurrentUsername(user.username);
+          } else {
+            setCurrentUsername('Anon');
+          }
+        } catch (error) {
+          console.error('Erreur lors de la récupération du nom d\'utilisateur :', error);
+          setCurrentUsername('Anon');
+        }
+      }
+    };
+
+    fetchUsername();
+  }, []); // Le tableau de dépendances est vide, donc cette fonction est appelée une seule fois au montage du composant
+
+  useEffect(() => {
     if (position) {
       const map = L.map('map').setView(position, 13);
 
@@ -44,12 +71,12 @@ function MapComponent() {
 
       const marker = L.marker(position).addTo(map);
 
-      // Initial creation of the popup with the form
-      createPopup(map, position);
+      // Passer currentUsername à createPopup
+      createPopup(map, position, currentUsername);
 
       return () => map.remove();
     }
-  }, [position]);
+  }, [position, currentUsername]); // Ajoutez currentUsername comme dépendance pour que le popup soit mis à jour avec le bon nom d'utilisateur
 
   if (loading) return <div>Chargement de la carte...</div>;
   if (error) return <div>{error}</div>;

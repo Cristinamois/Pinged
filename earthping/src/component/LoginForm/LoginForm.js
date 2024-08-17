@@ -25,6 +25,14 @@ function LoginForm() {
     try {
       const response = await axios.post('http://localhost:3001/api/login', formData);
       localStorage.setItem('authToken', response.data.token); // Stocker le token
+      // const token = localStorage.getItem('authToken');
+      // if (token)
+      // {
+      //   console.log('token ok !');
+      // }
+      // else {
+      //   console.log('token not ok');
+      // }
       navigate('/dashboard'); // Rediriger vers la page Dashboard après connexion
     } catch (error) {
       console.error('Error logging in:', error.response?.data || error.message);

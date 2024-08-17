@@ -3,15 +3,65 @@ import L from 'leaflet';
 // Variable pour stocker le popup actuellement ouvert
 let currentPopup = null;
 
-export function displayMessage(map, position, message, duration = 10 * 1000) {
-  // Fermer l'ancien popup s'il existe
+// Fonction pour envoyer le message au backend
+export function sendMessageToBackend(message, username) {
+  const token = localStorage.getItem('authToken'); // Assurez-vous que le token est stocké dans le localStorage
+  if (!token) {
+    console.error('Token is not available');
+    return;
+  }
+
+  fetch('http://localhost:3001/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` // Inclure le token dans les headers
+    },
+    body: JSON.stringify({ message, username }), // Envoyer le message et le nom d'utilisateur
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Message envoyé avec succès :', data);
+    })
+    .catch(error => {
+      console.error('Erreur lors de l\'envoi du message :', error);
+    });
+}
+
+let currentUsername = 'Anon';
+
+
+export function fetchUsername() {
+  const token = localStorage.getItem('authToken');
+  if (token) {
+    fetch('http://localhost:3001/api/user', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(response => response.json())
+      .then(user => {
+        currentUsername = user.username;
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération du nom d\'utilisateur :', error);
+      });
+  }
+}
+
+
+
+
+
+export function displayMessage(map, position, message, username, duration = 10 * 1000) {
   if (currentPopup) {
     map.removeLayer(currentPopup);
   }
 
   const popupContent = `
     <div id="popup-content">
-      <p>${message}</p>
+      <p><strong>${username}:</strong> ${message}</p>
     </div>
   `;
 
@@ -19,25 +69,23 @@ export function displayMessage(map, position, message, duration = 10 * 1000) {
     closeOnClick: false,
     autoClose: false,
     closeButton: false,
-    className: 'custom-popup' // Ajouter la classe personnalisée ici
+    className: 'custom-popup'
   })
     .setLatLng(position)
     .setContent(popupContent)
     .openOn(map);
 
-  // Mettre à jour la référence au popup actuel
   currentPopup = popup;
 
   setTimeout(() => {
-    if (currentPopup === popup) { // Vérifier si c'est le même popup qui est encore ouvert
+    if (currentPopup === popup) {
       map.removeLayer(popup);
-      createPopup(map, position); // Réaffiche le formulaire après l'expiration du message
+      createPopup(map, position, username);
     }
   }, duration);
 }
 
-export function createPopup(map, position) {
-  // Fermer l'ancien popup s'il existe
+export function createPopup(map, position, username) {
   if (currentPopup) {
     map.removeLayer(currentPopup);
   }
@@ -54,45 +102,21 @@ export function createPopup(map, position) {
   const popup = L.popup({
     closeOnClick: false,
     autoClose: false,
-    className: 'custom-popup' // Ajouter la classe personnalisée ici
+    className: 'custom-popup'
   })
     .setLatLng(position)
     .setContent(popupContent)
     .openOn(map);
 
-  // Mettre à jour la référence au popup actuel
   currentPopup = popup;
 
   document.getElementById('message-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const message = document.getElementById('message-input').value;
     if (message) {
-      // Remplace le contenu du popup avec le message saisi
-      popup.setContent(`<p>${message}</p>`).update();
-
-      // Envoyer le message au backend
-      sendMessageToBackend(message);
-
-      // Affiche le message et le cache après 10 secondes
-      displayMessage(map, position, message);
+      popup.setContent(`<p><strong>${username}:</strong> ${message}</p>`).update();
+      sendMessageToBackend(message, username);
+      displayMessage(map, position, message, username);
     }
   });
-}
-
-// Fonction pour envoyer le message au backend
-function sendMessageToBackend(message) {
-  fetch('http://localhost:3001/messages', { // URL du serveur backend
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ message }), // Envoyer le message en tant que JSON
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Message envoyé avec succès :', data);
-    })
-    .catch(error => {
-      console.error('Erreur lors de l\'envoi du message :', error);
-    });
 }
