@@ -4,15 +4,22 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const pool = require('./db'); // Importez la configuration de la base de données
-
+const authRoutes = require('./routes/auth');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+
+const corsOptions = {
+  origin: 'http://localhost:3000', // L'origine de votre frontend
+  credentials: true, // Pour permettre l'envoi de cookies, si vous en utilisez
+};
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
+
 // Route to handle signup
+app.use('/api', authRoutes);
 app.post('/signup', async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
 

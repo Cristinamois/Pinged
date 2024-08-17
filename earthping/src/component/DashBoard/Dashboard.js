@@ -1,7 +1,6 @@
+// Dashboard.js
 import React from 'react';
-// import './Header.css';
-// import './Landing.js'
-import './Dashboard.css'
+import './Dashboard.css';
 import Header from '../Header/Header.js';
 import MapComponent from '../Map/Map.js';
 
@@ -18,4 +17,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-

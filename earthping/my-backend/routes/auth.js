@@ -20,4 +20,18 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+
+router.post('/logout', (req, res) => {
+  try {
+    // Effacer le cookie d'authentification s'il y en a un
+    res.clearCookie('authToken'); // Assurez-vous que le nom correspond au cookie que vous utilisez pour la session
+
+    // Répondre avec succès
+    res.status(200).json({ message: 'Logged out successfully' });
+  } catch (error) {
+    console.error('Error during logout:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 module.exports = router;
