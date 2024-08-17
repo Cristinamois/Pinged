@@ -15,10 +15,24 @@ router.post('/signup', async (req, res) => {
   }
 
   try {
-    const newUser = new User({ firstName, lastName, username, email, password });
-    await newUser.save();
+    // Vérifier si l'email existe déjà
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (result.rows.length > 0) {
+      return res.status(400).json({ message: 'Email already exists' });
+    }
+
+    // Hacher le mot de passe
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Sauvegarder l'utilisateur
+    await pool.query(
+      'INSERT INTO users (first_name, last_name, username, email, password) VALUES ($1, $2, $3, $4, $5)',
+      [firstName, lastName, username, email, hashedPassword]
+    );
+
     res.status(201).json({ message: 'User created successfully' });
   } catch (err) {
+    console.error('Error during signup:', err);
     res.status(500).json({ message: 'Error creating user', error: err });
   }
 });
@@ -37,14 +51,18 @@ router.post('/logout', (req, res) => {
   }
 });
 
-// Route pour gérer la connexion
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
 
   try {
     // Trouver l'utilisateur
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     const user = result.rows[0];
+
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
@@ -64,5 +82,7 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+
 
 module.exports = router;
