@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './LoginForm.css';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function LoginForm() {
   });
 
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Pour la redirection après connexion
 
   const handleChange = (e) => {
     setFormData({
@@ -17,18 +19,17 @@ function LoginForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:3001/login', formData)
-      .then(response => {
-        console.log('Login successful:', response.data);
-        // Handle login success (e.g., store token, redirect, etc.)
-      })
-      .catch(error => {
-        console.error('Error logging in:', error.response?.data || error.message);
-        setError('Invalid email or password');
-      });
+    try {
+      const response = await axios.post('http://localhost:3001/api/login', formData);
+      localStorage.setItem('authToken', response.data.token); // Stocker le token
+      navigate('/dashboard'); // Rediriger vers la page Dashboard après connexion
+    } catch (error) {
+      console.error('Error logging in:', error.response?.data || error.message);
+      setError('Invalid email or password');
+    }
   };
 
   return (

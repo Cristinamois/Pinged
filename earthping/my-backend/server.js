@@ -3,78 +3,24 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const pool = require('./db'); // Importez la configuration de la base de données
+const pool = require('./db'); // Assurez-vous que ce fichier existe et est correctement configuré
 const authRoutes = require('./routes/auth');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-
 const corsOptions = {
-  origin: 'http://localhost:3000', // L'origine de votre frontend
-  credentials: true, // Pour permettre l'envoi de cookies, si vous en utilisez
+  origin: 'http://localhost:3000',
+  credentials: true,
 };
+
 // Middleware
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
+// Routes
+app.use('/api', authRoutes); // Route pour les authentifications
 
-// Route to handle signup
-app.use('/api', authRoutes);
-app.post('/signup', async (req, res) => {
-  const { firstName, lastName, username, email, password } = req.body;
-
-  try {
-    // Check if email already exists
-    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    if (result.rows.length > 0) {
-      return res.status(400).json({ message: 'Email already exists' });
-    }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Save user
-    await pool.query(
-      'INSERT INTO users (first_name, last_name, username, email, password) VALUES ($1, $2, $3, $4, $5)',
-      [firstName, lastName, username, email, hashedPassword]
-    );
-
-    res.status(201).json({ message: 'User created' });
-  } catch (error) {
-    console.error('Error during signup:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
-// Route to handle login
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    // Find user
-    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    const user = result.rows[0];
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid email or password' });
-    }
-
-    // Check password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid email or password' });
-    }
-
-    // Generate token
-    const token = jwt.sign({ email: user.email }, 'your_jwt_secret', { expiresIn: '1h' });
-
-    res.json({ token });
-  } catch (error) {
-    console.error('Error during login:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
-// Route to test if server is running
+// Route pour tester si le serveur fonctionne
 app.get('/ping', (req, res) => {
   res.json({ message: 'Pong' });
 });
