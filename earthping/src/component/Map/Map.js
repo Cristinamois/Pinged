@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
 import './Map.css'; // Importer les styles spécifiques à la carte
 import { createPopup } from './MessageHandler';
+import Loading from '../Loading/Loading';
 
 function MapComponent() {
   const [position, setPosition] = useState(null);
@@ -78,7 +79,7 @@ function MapComponent() {
     }
   }, [position, currentUsername]); // Ajoutez currentUsername comme dépendance pour que le popup soit mis à jour avec le bon nom d'utilisateur
 
-  if (loading) return <div>Chargement de la carte...</div>;
+  if (loading) return <div><Loading /></div>;
   if (error) return <div>{error}</div>;
 
   return (
